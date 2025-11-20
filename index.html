@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Highlights WEBSITE!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('background.jpg');
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-attachment: fixed;
+      color: rgb(255, 0, 0);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .hero-image {
+      display: block;
+      margin: 10px auto;
+      width: 1000px;
+      border-radius: 10px;
+      position: relative; /* required for z-index to take effect */
+      z-index: 1100;      /* higher than floating images and whatsapp image */
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .floating-image {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      z-index: 500;
+    }
+
+    .floating-image:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-image {
+      position: fixed;
+      bottom: 1px;     /* distance from bottom edge */
+      left: 10px;       /* distance from left edge */
+      width: 240px;     /* size of the image */
+      border-radius: 10px;
+      z-index: 1000;    /* make sure it's above others */
+    }
+
+    /* Separate fixed buttons so styles do not overwrite each other */
+    .comment-btn {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      width: 150px;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+
+    .info-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 10px;
+      width: 80px;
+      border-radius: 10px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="" alt" style="display:block; margin: 20px auto;">
+
+  <img src="WhatsApp Image 2025-11-10 at 23.13.39_f9d46e85.png" alt="puppo" class="whatsapp-image">
+
+
+  <img src="cool.gif" alt="food highlits web"
+ style="display:block; margin: 10px auto; width:1000px; border-radius:10px;" class="hero-image">
+
+
+ <a href="recipes.html">
+    <img src="egg.jpg" class="floating-image" alt="Egg drop soup">
+  </a>
+
+  <a href="pizza.html">
+    <img src="fishpizza.jpg" class="floating-image" alt="Fish head pizza">
+  </a>
+
+  <a href="blueberry.html">
+    <img src="blueberrypie.jpg" class="floating-image" alt="Blueberry pie">
+  </a>
+
+  <a href="darcy.html">
+    <img src="darcyheader.jpg" class="floating-image" alt="Darcy's soup">
+  </a>
+
+  <a href="cookies.html">
+    <img src="cookies.jpg" class="floating-image" alt="Rancid cookies">
+  </a>
+
+  <a href="lyla.html">
+    <img src="oat1.jpg" class="floating-image" alt="baked oats">
+  </a>
+  
+  <a href="https://martincheck.atabook.org/">
+    <img src="commentpic.png" class="comment-btn" alt="comment">
+  </a>
+
+  <a href="info.html">
+    <img src="info.png" class="info-btn" alt="info">
+  </a>
+
+  <script>
+    const images = document.querySelectorAll('.floating-image');
+    const imageData = [];
+
+    images.forEach(img => {
+      const x = Math.random() * (window.innerWidth - img.width);
+      const y = Math.random() * (window.innerHeight - img.height);
+      const vx = (Math.random() * 0.5 + 0.2) * (Math.random() < 0.5 ? 1 : -1);
+      const vy = (Math.random() * 0.5 + 0.2) * (Math.random() < 0.5 ? 1 : -1);
+      imageData.push({ img, x, y, vx, vy });
+      img.style.left = x + 'px';
+      img.style.top = y + 'px';
+    });
+
+    function animate() {
+      imageData.forEach(data => {
+        data.x += data.vx;
+        data.y += data.vy;
+
+        if (data.x < 0 || data.x + data.img.width > window.innerWidth) data.vx *= -1;
+        if (data.y < 0 || data.y + data.img.height > window.innerHeight) data.vy *= -1;
+
+        data.img.style.left = data.x + 'px';
+        data.img.style.top = data.y + 'px';
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      imageData.forEach(data => {
+        if (data.x + data.img.width > window.innerWidth) data.x = window.innerWidth - data.img.width;
+        if (data.y + data.img.height > window.innerHeight) data.y = window.innerHeight - data.img.height;
+      });
+    });
+  </script>
+
+</body>
+</html>
